@@ -102,6 +102,10 @@ public class EjemploJlabel {
         ventana.add(boton0);
         ventana.setVisible(true);
         
+        JButton botonCalcular = new JButton("CALCULAR");
+        botonCalcular.setBounds(300, 485, 200, 40);
+        ventana.add(botonCalcular);
+       
 
 }
 }
