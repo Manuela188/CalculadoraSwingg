@@ -1,0 +1,4 @@
+
+manuela,3,2
+manuela,120,2
+camilo,345,1
