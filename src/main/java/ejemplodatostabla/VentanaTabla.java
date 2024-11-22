@@ -29,7 +29,7 @@ public class VentanaTabla extends javax.swing.JFrame {
      BufferedReader bufferedReader = null;
         try {
             
-            File file = new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\EjemploDatosTabla\\src\\main\\java\\ejemplodatostabla\\archivo.txt");
+            File file = new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\CalculadoraSwingg\\EjemploDatosTabla\\src\\main\\java\\ejemplodatostabla\\archivo.txt");
              if (!file.exists()) {
             System.out.println("El archivo no existe: " + file.getAbsolutePath());
             return;
@@ -43,12 +43,12 @@ public class VentanaTabla extends javax.swing.JFrame {
         
        
         while ((linea = bufferedReader.readLine()) != null) {
-            System.out.println("Leyendo línea: " + linea);
+            System.out.println("Leyendo linea: " + linea);
            
             String[] datosFila = linea.split(",");
             
             
-            if (datosFila.length == 3) {
+            if (datosFila.length == 4) {
                 modelo.addRow(datosFila); 
             } else {
                 System.out.println("La linea no tiene el formato correcto: " + linea);
@@ -67,16 +67,16 @@ public class VentanaTabla extends javax.swing.JFrame {
     }
 }
     
-     public void AgregarProducto(String nombre, String precio, String categoria) {
+     public void AgregarProducto(String nombre, String precio, String categoria, String codigodeproducto) {
         BufferedWriter bufferedWriter = null;
         try {
-            File file = new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\EjemploDatosTabla\\src\\main\\java\\ejemplodatostabla\\archivo.txt");
+            File file = new File("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\CalculadoraSwingg\\EjemploDatosTabla\\src\\main\\java\\ejemplodatostabla\\archivo.txt");
             bufferedWriter = new BufferedWriter(new FileWriter(file, true)); 
-            bufferedWriter.write(nombre + "," + precio + "," + categoria);
+            bufferedWriter.write(nombre + "," + precio + "," + categoria + "," + codigodeproducto);
             bufferedWriter.newLine();
             
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            modelo.addRow(new String[]{nombre, precio, categoria});
+            modelo.addRow(new String[]{nombre, precio, categoria, codigodeproducto});
             
            
             CargarDatos();
@@ -111,18 +111,22 @@ public class VentanaTabla extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Precio", "Categoria"
+                "Nombre", "Precio", "Categoria", "Codigo de producto"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -148,6 +152,28 @@ public class VentanaTabla extends javax.swing.JFrame {
             }
         });
 
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Codigo de producto");
+
+        jButton2.setText("Modificar ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Eliminar ");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,27 +181,33 @@ public class VentanaTabla extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(190, 190, 190)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(62, 62, 62)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField4)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(190, 190, 190)
-                                .addComponent(jLabel1)))
-                        .addGap(73, 73, 73)
-                        .addComponent(jButton1)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3)
+                            .addComponent(jButton1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,10 +226,16 @@ public class VentanaTabla extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -210,15 +248,65 @@ public class VentanaTabla extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String nombre = jTextField1.getText().trim();
         String precio = jTextField2.getText().trim(); // Cambia esto a "teléfono" u otra variable relevante si se refiere a contactos
-        String categoria = jTextField3.getText().trim(); // Similar ajuste aquí si es necesario
+        String categoria = jTextField3.getText().trim();
+        String codigodeproducto = jTextField4.getText().trim();// Similar ajuste aquí si es necesario
 
-        if (!nombre.isEmpty() && !precio.isEmpty() && !categoria.isEmpty()) {
-            AgregarProducto(nombre, precio, categoria);
+        if (!nombre.isEmpty() && !precio.isEmpty() && !categoria.isEmpty() && !codigodeproducto.isEmpty()) {
+            AgregarProducto(nombre, precio, categoria, codigodeproducto);
         } else {
             javax.swing.JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
     }
     
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow == -1) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Por favor, seleccione un producto para modificar.");
+        return;
+    }
+
+    String nombre = jTextField1.getText().trim();
+    String precio = jTextField2.getText().trim();
+    String categoria = jTextField3.getText().trim();
+    String codigodeproducto = jTextField4.getText().trim();
+
+    if (nombre.isEmpty() || precio.isEmpty() || categoria.isEmpty() || codigodeproducto.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+        return;
+    }
+
+    
+    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+    modelo.setValueAt(nombre, selectedRow, 0);
+    modelo.setValueAt(precio, selectedRow, 1);
+    modelo.setValueAt(categoria, selectedRow, 2);
+    modelo.setValueAt(codigodeproducto, selectedRow, 3);
+
+    
+    ActualizarArchivo();
+                       
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow == -1) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Por favor, seleccione un producto para eliminar.");
+        return;
+    }
+
+    
+    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+    modelo.removeRow(selectedRow);
+
+   
+    ActualizarArchivo();
+                  
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,14 +361,22 @@ public class VentanaTabla extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
+
+    private void ActualizarArchivo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

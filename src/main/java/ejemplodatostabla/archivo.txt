@@ -1,4 +1,5 @@
 
-manuela,3,2
-manuela,120,2
-camilo,345,1
+manuela,256,1,3
+manuela,256,1,3
+sara,890,1,4
+sara,890,1,4
